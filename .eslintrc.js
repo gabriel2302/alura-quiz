@@ -19,5 +19,8 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'comma-dangle': 'off',
     'object-curly-newline': 'off',
+    'react/destructuring-assignment': 'off',
+    'no-unused-vars': 'off',
+    'jsx-a11y/anchor-is-valid': 'off',
   },
 };

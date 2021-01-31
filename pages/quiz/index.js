@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import Lottie from 'react-lottie';
 
-import db from '../db.json';
-import Widget from '../src/components/Widget';
-import QuizBackground from '../src/components/QuizBackground';
-import QuizContainer from '../src/components/QuizContainer';
-import QuizLogo from '../src/components/QuizLogo';
-import Button from '../src/components/Button';
-import AlternativeForm from '../src/components/AlternativeForm';
+import db from '../../db.json';
+import Widget from '../../src/components/Widget';
+import QuizBackground from '../../src/components/QuizBackground';
+import QuizContainer from '../../src/components/QuizContainer';
+import QuizLogo from '../../src/components/QuizLogo';
+import Button from '../../src/components/Button';
+import AlternativeForm from '../../src/components/AlternativeForm';
+
+import animationData from '../../src/animation/loading.json';
 
 function ResultWidget({ results }) {
   return (
@@ -38,12 +41,16 @@ function ResultWidget({ results }) {
 }
 
 function LoadingWidget() {
-  return (
-    <Widget>
-      <Widget.Header>Carregando...</Widget.Header>
-      <Widget.Content>Aguarde enquanto carregamos seu quiz</Widget.Content>
-    </Widget>
-  );
+  const defaultOptions = {
+    loop: false,
+    autoplay: false,
+    animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
+
+  return <Lottie options={defaultOptions} width={300} height={300} />;
 }
 
 function QuestionWidget({
@@ -74,8 +81,7 @@ function QuestionWidget({
     <Widget>
       <Widget.Header>
         <h3>
-          Pergunta 1 de
-          {` ${totalQuestions}`}
+          <h3>{`Pergunta ${questionIndex + 1} de ${totalQuestions}`}</h3>
         </h3>
       </Widget.Header>
       <img
