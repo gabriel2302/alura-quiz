@@ -18,5 +18,6 @@ module.exports = {
     'implicit-arrow-linebreak': 'off',
     'react/jsx-props-no-spreading': 'off',
     'comma-dangle': 'off',
+    'object-curly-newline': 'off',
   },
 };
