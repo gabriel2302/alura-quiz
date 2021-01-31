@@ -48,11 +48,12 @@ export default function Home() {
           animate="show"
         >
           <Widget.Header>
-            <h1>Javascript Quiz</h1>
+            <h1>Yugioh Quiz</h1>
           </Widget.Header>
           <Widget.Content>
             <form onSubmit={handleSubmitForm}>
               <Input placeholder="Diz ai seu nome" onChange={handleSubmit} />
+
               <Button type="submit" disabled={name.length === 0}>
                 {`Jogar ${name}`}
               </Button>
@@ -71,6 +72,9 @@ export default function Home() {
         >
           <Widget.Content>
             <h1>Quiz da galera</h1>
+            <span>
+              Favor colocar o nome acima antes de clicar em algum link
+            </span>
             <ul>
               {db.external.map((quiz) => {
                 const [project, user] = handleFormat(quiz);
@@ -78,8 +82,12 @@ export default function Home() {
                   <li>
                     <Widget.Topic
                       as={Link}
-                      href={`/quiz/${project}___${user}`}
+                      href={
+                        name.length === 0 ? '' : `/quiz/${project}___${user}`
+                      }
                       key={quiz}
+                      style={{ color: '#fff' }}
+                      role="button"
                     >
                       {`${project}/${user}`}
                     </Widget.Topic>

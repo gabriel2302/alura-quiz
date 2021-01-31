@@ -11,10 +11,10 @@ import AlternativeForm from '../../src/components/AlternativeForm';
 
 import animationData from '../../src/animation/loading.json';
 
-function ResultWidget({ results }) {
+function ResultWidget({ results, name }) {
   return (
     <Widget>
-      <Widget.Header>Carregando...</Widget.Header>
+      <Widget.Header>{`Parabéns: ${name}`}</Widget.Header>
       <Widget.Content>
         <p>
           {'Você acertou '}
@@ -132,7 +132,7 @@ function QuestionWidget({
   );
 }
 
-export default function QuizPage() {
+export default function QuizPage({ name }) {
   const [screenState, setScreenState] = useState('LOAD');
   const [results, setResults] = useState([]);
   const totalQuestions = db.questions.length;
@@ -174,8 +174,20 @@ export default function QuizPage() {
           />
         )}
         {screenState === 'LOAD' && <LoadingWidget />}
-        {screenState === 'RESULT' && <ResultWidget results={results} />}
+        {screenState === 'RESULT' && (
+          <ResultWidget results={results} name={name} />
+        )}
       </QuizContainer>
     </QuizBackground>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { name } = context.query;
+
+  return {
+    props: {
+      name,
+    },
+  };
 }
